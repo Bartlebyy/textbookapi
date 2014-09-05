@@ -14,7 +14,6 @@ gem 'devise'
 gem 'httparty'
 gem 'vacuum'
 gem 'figaro'
-gem 'heroku'
 
 group :development do
   gem 'better_errors'
@@ -37,5 +36,6 @@ group :test do
 end
 
 group :production do
+  gem 'pg'
   gem 'rails_12factor'
 end
