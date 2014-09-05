@@ -9,17 +9,35 @@ class Book < ActiveRecord::Base
       aws_secret_access_key: ENV["SECRET_AWS_ACCESS_KEY"],
       associate_tag: ENV["ASSOCIATE_TAG"]
       )
+    res = req.item_lookup(query: amazon_search_params)
+    res.to_h
+  end
+
+  def get_book_attributes
+    req = Vacuum.new
+    req.configure(
+      aws_access_key_id:     ENV["AWS_ACCESS_KEY_ID"],
+      aws_secret_access_key: ENV["SECRET_AWS_ACCESS_KEY"],
+      associate_tag: ENV["ASSOCIATE_TAG"]
+      )
     res = req.item_lookup(query: search_params)
     res.to_h
   end
 
-  def search_params
+  def amazon_search_params
     {
       'IdType' => 'ISBN',
       'ResponseGroup' => 'Offers',
       'ItemId' => self.isbn,
       'SearchIndex' => 'All'
+    }
+  end
 
+  def search_params
+    {
+      'IdType' => 'ISBN',
+      'ItemId' => self.isbn,
+      'SearchIndex' => 'All'
     }
   end
 

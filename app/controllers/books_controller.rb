@@ -6,7 +6,8 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     #respond_to do |format|
-      render :json => @book.search_amazon 
+    json_output = {attributes: @book.get_book_attributes, amz_search: @book.search_amazon}
+    render :json => json_output
     #end
   end
 
@@ -18,7 +19,8 @@ class BooksController < ApplicationController
     #@book = books.build(book_param)
     @book = Book.new(params.require(:book).permit(:isbn))
     if @book.save
-      redirect_to(@book, format: :json)
+      json_output = {attributes: @book.get_book_attributes, amz_search: @book.search_amazon}
+      render :json => json_output
     else
       render('new')
     end
