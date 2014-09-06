@@ -6,8 +6,8 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     #respond_to do |format|
-    json_output = {attributes: @book.get_book_attributes, amz_search: @book.search_amazon}
-    render :json => json_output
+    # json_output = {attributes: @book.get_book_attributes, amz_search: @book.search_amazon}
+    # render :json => json_output
     #end
   end
 

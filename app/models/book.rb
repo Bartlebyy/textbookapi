@@ -10,7 +10,8 @@ class Book < ActiveRecord::Base
       associate_tag: ENV["ASSOCIATE_TAG"]
       )
     res = req.item_lookup(query: amazon_search_params)
-    res.to_h
+    bob = res.to_h
+    bob["ItemLookupResponse"]["Items"]["Item"]
   end
 
   def get_book_attributes
@@ -21,7 +22,8 @@ class Book < ActiveRecord::Base
       associate_tag: ENV["ASSOCIATE_TAG"]
       )
     res = req.item_lookup(query: search_params)
-    res.to_h
+    res = res.clone.to_h
+    res["ItemLookupResponse"]["Items"]["Item"][0]["ItemAttributes"]
   end
 
   def amazon_search_params
