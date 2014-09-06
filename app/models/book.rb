@@ -40,6 +40,7 @@ class Book < ActiveRecord::Base
   def search_params
     {
       'IdType' => 'ISBN',
+      'ResponseGroup' => 'ItemAttributes',
       'ItemId' => self.isbn,
       'SearchIndex' => 'All'
     }
